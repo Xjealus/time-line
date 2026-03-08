@@ -2,7 +2,7 @@
   <ion-page>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
-      <ion-tab-bar slot="bottom">
+      <ion-tab-bar slot="bottom" v-show="!isTab1">
         <ion-tab-button tab="tab1" href="/tabs/tab1">
           <ion-icon aria-hidden="true" :icon="triangle" />
           <ion-label>Tab 1</ion-label>
@@ -25,4 +25,28 @@
 <script setup lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { ellipse, square, triangle } from 'ionicons/icons';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const isTab1 = computed(() => route.path.includes('/tabs/tab1'));
 </script>
+
+<style scoped>
+ion-tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ion-router-outlet {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+}
+
+ion-router-outlet > * {
+  width: 100%;
+  height: 100%;
+}
+</style>

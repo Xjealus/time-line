@@ -34,6 +34,45 @@ import '@ionic/vue/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 
+// Add smooth scrolling to html and body
+document.documentElement.style.scrollBehavior = 'smooth';
+
+// Bootstrap CSS
+const bootstrapLink = document.createElement('link');
+bootstrapLink.rel = 'stylesheet';
+bootstrapLink.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css';
+document.head.appendChild(bootstrapLink);
+
+// Google Fonts
+const fontsLink = document.createElement('link');
+fontsLink.rel = 'stylesheet';
+fontsLink.href = 'https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap';
+document.head.appendChild(fontsLink);
+
+// AOS CSS
+const aosLink = document.createElement('link');
+aosLink.rel = 'stylesheet';
+aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+document.head.appendChild(aosLink);
+
+// AOS JS
+const aosScript = document.createElement('script');
+aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
+aosScript.async = true;
+document.head.appendChild(aosScript);
+
+// Lucide Icons JS
+const lucideScript = document.createElement('script');
+lucideScript.src = 'https://unpkg.com/lucide@latest';
+lucideScript.async = true;
+document.head.appendChild(lucideScript);
+
+// Bootstrap JS
+const bootstrapScript = document.createElement('script');
+bootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+bootstrapScript.async = true;
+document.head.appendChild(bootstrapScript);
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue'
-
+import { authService } from '../../auth/auth-service';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -10,6 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/tabs/',
     component: TabsPage,
+    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -28,12 +29,35 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Tab3Page.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/LoginPage.vue')
+  },
+  {
+    path: '/era/prehistoric',
+    component: () => import('@/views/PrehistoricPage.vue'),
+    meta: { requiresAuth: true }
   }
+
+  //เพื่อนเพิ่มหน้าต่อไปในนี้ได้เลย ก้อปโค้ดข้างบนเอาของยุค Prehistoricไปเปลี่ยนเป็นของยุคที่ต้องการ แล้วเปลี่ยน path กับ component ให้ตรงกันกับยุคที่ต้องการก็ได้เลย
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
+
+router.beforeEach(async (to) => {
+  const user = await authService.getCurrentUser();
+  // login แล้ว ห้ามเข้า /login
+  if (to.path === "/login" && user) {
+    return "/tabs/tab1";
+  }
+  if (to.meta.requiresAuth && !user) {
+    return "/login";
+  }
+  return true;
+});
 
 export default router
